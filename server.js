@@ -9,7 +9,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
@@ -36,12 +36,10 @@ app.post("/chat", async (req, res) => {
     res.json({ message: result });
   } catch (error) {
     console.error("Error generating response:", error);
-    res
-      .status(500)
-      .json({
-        message:
-          "An error occurred while generating the response. Please try again.",
-      });
+    res.status(500).json({
+      message:
+        "An error occurred while generating the response. Please try again.",
+    });
   }
 });
 
