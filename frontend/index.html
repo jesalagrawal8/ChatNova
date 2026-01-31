@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChatNova - AI Assistant</title>
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='url(%23grad)'/><defs><linearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:rgb(168,85,247)'/><stop offset='100%25' style='stop-color:rgb(236,72,153)'/></linearGradient></defs><text x='50' y='70' font-size='60' text-anchor='middle' fill='white'>🤖</text></svg>"
+      type="image/svg+xml"
+    />
+
+    <link rel="stylesheet" href="output.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+
+  <body class="bg-[#343541] text-white overflow-x-hidden">
+    <!-- Header -->
+    <header
+      class="fixed top-0 left-0 right-0 bg-[#343541] border-b border-gray-700/50 z-50"
+    >
+      <div
+        class="container mx-auto max-w-4xl px-4 py-4 flex items-center justify-between"
+      >
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center"
+          >
+            <i class="fas fa-robot text-white text-xl"></i>
+          </div>
+          <h1 class="text-xl font-semibold">ChatNova</h1>
+        </div>
+        <button
+          id="new-chat"
+          class="flex items-center gap-2 px-4 py-2 bg-[#40414f] hover:bg-[#4a4b5a] rounded-lg transition-colors"
+        >
+          <i class="fas fa-plus"></i>
+          <span class="hidden sm:inline">New Chat</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Chat Container -->
+    <div
+      class="container mx-auto max-w-4xl px-4 pt-24 pb-44"
+      id="chat-container"
+    >
+      <!-- Welcome Screen -->
+      <div
+        id="welcome-screen"
+        class="flex flex-col items-center justify-center min-h-[60vh] text-center"
+      >
+        <div
+          class="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg"
+        >
+          <i class="fas fa-robot text-white text-4xl"></i>
+        </div>
+        <h2
+          class="text-4xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
+        >
+          Welcome to ChatNova
+        </h2>
+        <p class="text-gray-400 text-lg mb-8 max-w-md">
+          Your intelligent AI assistant powered by advanced language models. Ask
+          me anything!
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-2xl">
+          <div
+            class="bg-[#40414f] p-4 rounded-xl hover:bg-[#4a4b5a] transition-colors cursor-pointer example-prompt"
+          >
+            <div class="text-purple-400 mb-2">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+            <p class="text-sm">"Explain quantum computing in simple terms"</p>
+          </div>
+          <div
+            class="bg-[#40414f] p-4 rounded-xl hover:bg-[#4a4b5a] transition-colors cursor-pointer example-prompt"
+          >
+            <div class="text-blue-400 mb-2"><i class="fas fa-code"></i></div>
+            <p class="text-sm">"Write a Python function to sort an array"</p>
+          </div>
+          <div
+            class="bg-[#40414f] p-4 rounded-xl hover:bg-[#4a4b5a] transition-colors cursor-pointer example-prompt"
+          >
+            <div class="text-green-400 mb-2"><i class="fas fa-search"></i></div>
+            <p class="text-sm">"What's the latest tech news?"</p>
+          </div>
+          <div
+            class="bg-[#40414f] p-4 rounded-xl hover:bg-[#4a4b5a] transition-colors cursor-pointer example-prompt"
+          >
+            <div class="text-pink-400 mb-2"><i class="fas fa-pen"></i></div>
+            <p class="text-sm">"Help me write a professional email"</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Messages will be inserted here -->
+    </div>
+
+    <!-- Input Container -->
+    <div
+      class="fixed inset-x-0 bottom-0 bg-gradient-to-t from-[#343541] via-[#343541] to-transparent pt-6 pb-4"
+    >
+      <div class="container mx-auto max-w-4xl px-4">
+        <div
+          class="bg-[#40414f] rounded-2xl shadow-2xl border border-gray-700/50"
+        >
+          <textarea
+            class="w-full resize-none outline-none p-4 bg-transparent text-white placeholder-gray-500 max-h-48"
+            rows="1"
+            id="input"
+            placeholder="Message ChatNova..."
+            style="scrollbar-width: thin; scrollbar-color: #6b7280 transparent"
+          ></textarea>
+          <div class="flex items-center justify-between px-4 pb-3">
+            <div class="text-xs text-gray-500">
+              Press Enter to send, Shift+Enter for new line
+            </div>
+            <button
+              id="ask"
+              class="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 px-5 py-2.5 text-white rounded-xl font-medium transition-all duration-200 flex items-center gap-2 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <span>Send</span>
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
+        <p class="text-center text-xs text-gray-500 mt-3">
+          ChatNova can make mistakes. Consider checking important information.
+        </p>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
